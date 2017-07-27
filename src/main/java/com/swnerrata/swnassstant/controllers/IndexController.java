@@ -12,7 +12,9 @@ public class IndexController extends AbstractController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
+
         model.addAttribute("title", "SWN Assistant");
+
         return "index";
     }
 }
