@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -48,7 +49,11 @@ public class AuthenticationController extends AbstractController {
         }
 
         User newUser = new User(form.getUsername(), form.getPassword());
+        if (form.getGameMaster().equals("true")) {      //Want to use register form for set GM privilege
+           newUser.setGameMaster(true);
+        }
         userDao.save(newUser);
+
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:/";

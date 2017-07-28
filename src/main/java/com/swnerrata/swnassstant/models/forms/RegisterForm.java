@@ -10,6 +10,9 @@ public class RegisterForm extends LoginForm {
     @NotNull(message = "Passwords to not match")
     private String verifyPassword;
 
+    @NotNull
+    private String gameMaster;
+
     @Override
     public void setPassword(String password) {
         super.setPassword(password);
@@ -29,5 +32,13 @@ public class RegisterForm extends LoginForm {
         if (!getPassword().equals(verifyPassword)) {
             verifyPassword = null;
         }
+    }
+
+    public String getGameMaster() {
+        return gameMaster;
+    }
+
+    public void setGameMaster(String gameMaster) {
+        this.gameMaster = gameMaster;
     }
 }
