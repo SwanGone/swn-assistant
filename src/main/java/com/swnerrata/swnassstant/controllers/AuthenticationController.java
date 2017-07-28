@@ -49,7 +49,7 @@ public class AuthenticationController extends AbstractController {
         }
 
         User newUser = new User(form.getUsername(), form.getPassword());
-        if (form.getGameMaster().equals("true")) {      //Want to use register form for set GM privilege
+        if (form.getGameMaster().equals("true")) {      //This is very wonky but works
            newUser.setGameMaster(true);
         }
         userDao.save(newUser);
