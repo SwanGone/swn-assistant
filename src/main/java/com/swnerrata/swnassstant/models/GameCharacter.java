@@ -1,13 +1,19 @@
 package com.swnerrata.swnassstant.models;
 
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by seanburk on 7/28/17.
  */
-public class Character extends AbstractEntity {
+@Entity
+public class GameCharacter extends AbstractEntity {
 
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_-]{4,11}", message = "Invalid Character Name")
     private String name;
 
     private HashMap<String, Integer> level;
@@ -30,13 +36,15 @@ public class Character extends AbstractEntity {
 
     private ArrayList<String> masteredDisciplines;
 
+    public GameCharacter() { }
+
+    public GameCharacter(String name) { this.name = name; }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public HashMap<String, Integer> getLevel() {
         return level;
