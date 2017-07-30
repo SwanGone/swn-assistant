@@ -9,6 +9,11 @@
         <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
+    <div class="form-group">
+        <label th:for="hitPoints">Hit Points</label>
+        <input class="form-control" th:field="*{hitPoints}" />
+        <span th:errors="*{hitPoints}" class="error"></span>
+    </div>
 
     <input type="submit" value="Create" />
 </form>

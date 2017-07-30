@@ -2,7 +2,7 @@ package com.swnerrata.swnassstant.models;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,12 +13,24 @@ import java.util.HashMap;
 public class GameCharacter extends AbstractEntity {
 
     @NotNull
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_-]{4,11}", message = "Invalid Character Name")
+    @Size(min=1)
     private String name;
 
-    private HashMap<String, Integer> level;
+    private int level;
 
-    private HashMap<String, Integer> abilityScore; //TODO change abilityScore to its own class
+    private String characterClass;
+
+    private int strength;
+
+    private int intelligence;
+
+    private int dexterity;
+
+    private int wisdom;
+
+    private int constitution;
+
+    private int charisma;
 
     private int hitPoints;
 
@@ -36,9 +48,15 @@ public class GameCharacter extends AbstractEntity {
 
     private ArrayList<String> masteredDisciplines;
 
+
+    //Constructors
+
     public GameCharacter() { }
 
     public GameCharacter(String name) { this.name = name; }
+
+
+    //Getters and Setters
 
     public String getName() {
         return name;
@@ -46,21 +64,37 @@ public class GameCharacter extends AbstractEntity {
 
     public void setName(String name) { this.name = name; }
 
-    public HashMap<String, Integer> getLevel() {
-        return level;
-    }
+    public int getLevel() { return level; }
 
-    public void setLevel(HashMap<String, Integer> level) {
-        this.level = level;
-    }
+    public void setLevel(int level) { this.level = level; }
 
-    public HashMap<String, Integer> getAbilityScore() {
-        return abilityScore;
-    }
+    public String getCharacterClass() { return characterClass; }
 
-    public void setAbilityScore(HashMap<String, Integer> abilityScore) {
-        this.abilityScore = abilityScore;
-    }
+    public void setCharacterClass(String characterClass) { this.characterClass = characterClass; }
+
+    public int getStrength() { return strength; }
+
+    public void setStrength(int strength) { this.strength = strength; }
+
+    public int getIntelligence() { return intelligence; }
+
+    public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
+
+    public int getDexterity() { return dexterity; }
+
+    public void setDexterity(int dexterity) { this.dexterity = dexterity; }
+
+    public int getWisdom() { return wisdom; }
+
+    public void setWisdom(int wisdom) { this.wisdom = wisdom; }
+
+    public int getConstitution() { return constitution; }
+
+    public void setConstitution(int constitution) { this.constitution = constitution; }
+
+    public int getCharisma() { return charisma; }
+
+    public void setCharisma(int charisma) { this.charisma = charisma; }
 
     public int getHitPoints() {
         return hitPoints;
@@ -70,29 +104,21 @@ public class GameCharacter extends AbstractEntity {
         this.hitPoints = hitPoints;
     }
 
-    public int getPsiPoints() {
-        return psiPoints;
-    }
+    public int getPsiPoints() { return psiPoints; }
 
-    public void setPsiPoints(int psiPoints) {
-        this.psiPoints = psiPoints;
-    }
+    public void setPsiPoints(int psiPoints) { this.psiPoints = psiPoints; }
 
     public int getCurrentHitPoints() {
         return currentHitPoints;
     }
 
-    public void setCurrentHitPoints(int currentHitPoints) {
-        this.currentHitPoints = currentHitPoints;
-    }
+    public void setCurrentHitPoints(int currentHitPoints) { this.currentHitPoints = currentHitPoints; }
 
     public int getCurrentPsiPoints() {
         return currentPsiPoints;
     }
 
-    public void setCurrentPsiPoints(int currentPsiPoints) {
-        this.currentPsiPoints = currentPsiPoints;
-    }
+    public void setCurrentPsiPoints(int currentPsiPoints) { this.currentPsiPoints = currentPsiPoints; }
 
     public HashMap<String, Integer> getSkills() {
         return skills;
@@ -102,27 +128,20 @@ public class GameCharacter extends AbstractEntity {
         this.skills = skills;
     }
 
-    public HashMap<String, Integer> getGear() {
-        return gear;
-    }
+    public HashMap<String, Integer> getGear() { return gear; }
 
     public void setGear(HashMap<String, Integer> gear) {
         this.gear = gear;
     }
 
-    public ArrayList<String> getPsychicDisciplines() {
-        return psychicDisciplines;
-    }
+    public ArrayList<String> getPsychicDisciplines() { return psychicDisciplines; }
 
-    public void setPsychicDisciplines(ArrayList<String> psychicDisciplines) {
-        this.psychicDisciplines = psychicDisciplines;
-    }
+    public void setPsychicDisciplines(ArrayList<String> psychicDisciplines) { this.psychicDisciplines = psychicDisciplines; }
 
     public ArrayList<String> getMasteredDisciplines() {
         return masteredDisciplines;
     }
 
-    public void setMasteredDisciplines(ArrayList<String> masteredDisciplines) {
-        this.masteredDisciplines = masteredDisciplines;
-    }
+    public void setMasteredDisciplines(ArrayList<String> masteredDisciplines) { this.masteredDisciplines = masteredDisciplines; }
+
 }
