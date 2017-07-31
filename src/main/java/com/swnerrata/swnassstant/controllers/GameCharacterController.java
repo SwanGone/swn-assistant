@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,5 +45,14 @@ public class GameCharacterController extends AbstractController {
         gameCharacterDao.save(gameCharacter);
 
         return "redirect:/characters";
+    }
+
+    @RequestMapping(value = "view/{gameCharacterId}", method = RequestMethod.GET)
+    public String viewGameCharacter(Model model, @PathVariable int gameCharacterId) {
+
+        GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
+        model.addAttribute("gamecharacter", gameCharacter );
+
+        return "characters/view";
     }
 }

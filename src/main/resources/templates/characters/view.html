@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:object="${gamecharacter}">
+    <h1 th:text="*{name}">Character Name</h1>
+    <ul>
+        <li th:text="*{hitPoints}">Max Hit Points</li>
+    </ul>
+
+</div>
+
+</body>
+</html>

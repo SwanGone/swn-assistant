@@ -3,10 +3,10 @@
 <head th:replace="fragments :: head"></head>
 <body>
 This is where you will be able to view, create and update Characters.
-<h1>List O Characters</h1>
+<h1>List Of Characters</h1>
 <ul>
-   <li th:each="gamecharacter : ${gamecharacters}"
-       th:text="${gamecharacter.name}"></li>
+   <li th:each="gamecharacter : ${gamecharacters}">
+       <a th:href="'/characters/view/' + ${gamecharacter.uid}" th:text="${gamecharacter.name}"></a></li>
 </ul>
 </body>
 </html>
