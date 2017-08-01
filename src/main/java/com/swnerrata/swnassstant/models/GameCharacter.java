@@ -42,7 +42,7 @@ public class GameCharacter extends AbstractEntity {
 
     private HashMap<String, Integer> skills; //TODO change skills to its own class
 
-    private HashMap<String, Integer> gear; //TODO change gear to its own class
+    private HashMap<Gear, Integer> gearOwned; //TODO change gear to its own class
 
     private ArrayList<String> psychicDisciplines;
 
@@ -128,11 +128,9 @@ public class GameCharacter extends AbstractEntity {
         this.skills = skills;
     }
 
-    public HashMap<String, Integer> getGear() { return gear; }
+    public HashMap<Gear, Integer> getGearOwned() { return gearOwned; }
 
-    public void setGear(HashMap<String, Integer> gear) {
-        this.gear = gear;
-    }
+    public void setGearOwned(HashMap<Gear, Integer> gearOwned) { this.gearOwned = gearOwned; }
 
     public ArrayList<String> getPsychicDisciplines() { return psychicDisciplines; }
 

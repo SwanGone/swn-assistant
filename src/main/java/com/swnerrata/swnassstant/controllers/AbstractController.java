@@ -3,6 +3,7 @@ package com.swnerrata.swnassstant.controllers;
 import com.swnerrata.swnassstant.models.User;
 import com.swnerrata.swnassstant.models.data.GameCharacterDao;
 import com.swnerrata.swnassstant.models.data.GameCharacterDao;
+import com.swnerrata.swnassstant.models.data.GearDao;
 import com.swnerrata.swnassstant.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,9 @@ public abstract class AbstractController {
 
     @Autowired
     protected GameCharacterDao gameCharacterDao;
+
+    @Autowired
+    protected GearDao gearDao;
 
     public static final String userSessionKey = "user_id";
 
