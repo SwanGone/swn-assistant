@@ -5,9 +5,10 @@
 <div th:object="${gamecharacter}">
     <h1 th:text="*{name}">Character Name</h1>
     <ul>
-        <li th:text="*{hitPoints}">Max Hit Points</li>
+        <li th:text="'Max Hit Points: ' + *{hitPoints}">Max Hit Points</li>
     </ul>
 
+    <a th:href="'/characters/edit/' + ${gamecharacter.uid}">Edit Character</a>
 </div>
 
 </body>

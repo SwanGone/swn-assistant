@@ -17,4 +17,8 @@ public abstract class AbstractEntity {
     public int getUid() {
         return this.uid;
     }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 }

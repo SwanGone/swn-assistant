@@ -20,7 +20,6 @@ import javax.validation.Valid;
 public class GameCharacterController extends AbstractController {
 
 
-
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("gamecharacters", gameCharacterDao.findAll());
@@ -38,7 +37,7 @@ public class GameCharacterController extends AbstractController {
     public String create(Model model, @ModelAttribute @Valid GameCharacter gameCharacter, Errors errors, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Create GameCharacter");
+            model.addAttribute("title", "Create Character");
             return "characters/create";
         }
 
@@ -51,8 +50,32 @@ public class GameCharacterController extends AbstractController {
     public String viewGameCharacter(Model model, @PathVariable int gameCharacterId) {
 
         GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
-        model.addAttribute("gamecharacter", gameCharacter );
+        model.addAttribute("gamecharacter", gameCharacter);
 
         return "characters/view";
+    }
+
+    @RequestMapping(value = "/edit/{gameCharacterId}")
+    public String displayEditForm(Model model, @PathVariable int gameCharacterId) {
+
+        GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
+        model.addAttribute("gameCharacter", gameCharacter);
+        model.addAttribute("title", "Edit Character");
+
+        return "characters/edit";
+    }
+
+    @RequestMapping(value = "/edit/{gameCharacterId}", method = RequestMethod.POST)
+    public String edit(Model model, @ModelAttribute @Valid GameCharacter gameCharacter, Errors errors, HttpServletRequest request) {
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Errors Character");
+            return "characters/edit/" + gameCharacter.getUid();
+        }
+
+        gameCharacterDao.save(gameCharacter);
+
+        return "redirect:/characters";
     }
 }
