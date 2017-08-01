@@ -40,13 +40,13 @@ public class GameCharacter extends AbstractEntity {
 
     private int currentPsiPoints;
 
-    private HashMap<String, Integer> skills; //TODO change skills to its own class
+    private HashMap<Skill, Integer> skillsKnown;
 
-    private HashMap<Gear, Integer> gearOwned; //TODO change gear to its own class
+    private HashMap<Gear, Integer> gearOwned;
 
-    private ArrayList<String> psychicDisciplines;
+    private ArrayList<PsychicDiscipline> psychicDisciplinesKnown;
 
-    private ArrayList<String> masteredDisciplines;
+    private ArrayList<PsychicDiscipline> psychicDisciplinesMastered;
 
 
     //Constructors
@@ -120,26 +120,23 @@ public class GameCharacter extends AbstractEntity {
 
     public void setCurrentPsiPoints(int currentPsiPoints) { this.currentPsiPoints = currentPsiPoints; }
 
-    public HashMap<String, Integer> getSkills() {
-        return skills;
-    }
+    public HashMap<Skill, Integer> getSkillsKnown() { return skillsKnown; }
 
-    public void setSkills(HashMap<String, Integer> skills) {
-        this.skills = skills;
-    }
+    public void setSkillsKnown(HashMap<Skill, Integer> skillsKnown) { this.skillsKnown = skillsKnown; }
 
     public HashMap<Gear, Integer> getGearOwned() { return gearOwned; }
 
     public void setGearOwned(HashMap<Gear, Integer> gearOwned) { this.gearOwned = gearOwned; }
 
-    public ArrayList<String> getPsychicDisciplines() { return psychicDisciplines; }
+    public ArrayList<PsychicDiscipline> getPsychicDisciplinesKnown() { return psychicDisciplinesKnown; }
 
-    public void setPsychicDisciplines(ArrayList<String> psychicDisciplines) { this.psychicDisciplines = psychicDisciplines; }
-
-    public ArrayList<String> getMasteredDisciplines() {
-        return masteredDisciplines;
+    public void setPsychicDisciplinesKnown(ArrayList<PsychicDiscipline> psychicDisciplinesKnown) {
+        this.psychicDisciplinesKnown = psychicDisciplinesKnown;
     }
 
-    public void setMasteredDisciplines(ArrayList<String> masteredDisciplines) { this.masteredDisciplines = masteredDisciplines; }
+    public ArrayList<PsychicDiscipline> getPsychicDisciplinesMastered() { return psychicDisciplinesMastered; }
 
+    public void setPsychicDisciplinesMastered(ArrayList<PsychicDiscipline> psychicDisciplinesMastered) {
+        this.psychicDisciplinesMastered = psychicDisciplinesMastered;
+    }
 }
