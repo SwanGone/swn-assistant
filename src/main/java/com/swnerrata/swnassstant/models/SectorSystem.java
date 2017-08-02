@@ -1,8 +1,7 @@
 package com.swnerrata.swnassstant.models;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +13,17 @@ public class SectorSystem extends AbstractEntity {
 
     private String name;
 
-    private int rowNumber;
+    @Size(min=3,max=3)
+    private String rowNumber;
 
-    private int colNumber;
+    @Size(min=1,max=1)
+    private String colNumber;
 
     @OneToMany
     @JoinColumn(name = "sector_system_uid")
     private List<Planet> planetsInSystem = new ArrayList<>();
 
-    SectorSystem() { }
+    public SectorSystem() { }
 
     public String getName() {
         return name;
@@ -32,19 +33,19 @@ public class SectorSystem extends AbstractEntity {
         this.name = name;
     }
 
-    public int getRowNumber() {
+    public String getRowNumber() {
         return rowNumber;
     }
 
-    public void setRowNumber(int rowNumber) {
+    public void setRowNumber(String rowNumber) {
         this.rowNumber = rowNumber;
     }
 
-    public int getColNumber() {
+    public String getColNumber() {
         return colNumber;
     }
 
-    public void setColNumber(int colNumber) {
+    public void setColNumber(String colNumber) {
         this.colNumber = colNumber;
     }
 
@@ -52,7 +53,7 @@ public class SectorSystem extends AbstractEntity {
         return planetsInSystem;
     }
 
-    public void setWorldsInSystem(List<Planet> planetsInSystem) {
+    public void setPlanetsInSystem(List<Planet> planetsInSystem) {
         this.planetsInSystem = planetsInSystem;
     }
 }

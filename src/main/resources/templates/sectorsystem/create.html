@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<form method="post" th:object="${sectorSystem}" class="form-group">
+
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="colNumber">Column Number</label>
+        <input class="form-control" th:field="*{colNumber}" />
+    </div>
+    <div class="form-group">
+        <label th:for="rowNumber">Row Number</label>
+        <input class="form-control" th:field="*{rowNumber}" />
+    </div>
+
+    <input type="submit" value="Create" />
+</form>
+
+</body>
+</html>
