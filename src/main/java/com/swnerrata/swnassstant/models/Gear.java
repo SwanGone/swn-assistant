@@ -14,7 +14,7 @@ public class Gear extends AbstractEntity {
 
     private String description;
 
-    Gear() { }
+    public Gear() { }
 
     public String getName() { return name; }
 

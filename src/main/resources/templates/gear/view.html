@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:object="${gear}">
+    <h1 th:text="*{name}">Gear Name</h1>
+    <ul>
+        <li th:text="'Gear Type: ' + *{gearType}">Gear Type</li>
+        <li th:text="'Description: ' + *{description}">Description</li>
+    </ul>
+
+    <a th:href="'/gear/edit/' + ${gear.uid}">Edit Gear</a>
+</div>
+
+</body>
+</html>
