@@ -14,11 +14,21 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int uid;
 
+    private boolean approved = false;
+
     public int getUid() {
         return this.uid;
     }
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 }

@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface GameCharacterDao extends CrudRepository<GameCharacter, Integer> {
 
+    GameCharacter findByApproved(boolean approved);
 
 
 }

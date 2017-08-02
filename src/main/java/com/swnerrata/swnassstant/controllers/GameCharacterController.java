@@ -22,7 +22,7 @@ public class GameCharacterController extends AbstractController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("gamecharacters", gameCharacterDao.findAll());
+        model.addAttribute("gamecharacters", gameCharacterDao.findByApproved(true));
         return "/characters/index";
     }
 
