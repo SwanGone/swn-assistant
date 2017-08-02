@@ -34,9 +34,6 @@ public abstract class AbstractController {
     @Autowired
     protected SectorSystemDao sectorSystemDao;
 
-    @Autowired
-    protected UnapprovedCharacterDao unapprovedCharacterDao;
-
     public static final String userSessionKey = "user_id";
 
     protected User getUserFromSession(HttpSession session) {
