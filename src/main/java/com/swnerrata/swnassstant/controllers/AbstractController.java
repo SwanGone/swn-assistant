@@ -1,6 +1,5 @@
 package com.swnerrata.swnassstant.controllers;
 
-import com.swnerrata.swnassstant.models.SectorSystem;
 import com.swnerrata.swnassstant.models.User;
 import com.swnerrata.swnassstant.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,13 @@ public abstract class AbstractController {
     protected PsychicDisciplineDao psychicDisciplineDao;
 
     @Autowired
-    protected PlanetDao planet;
+    protected PlanetDao planetDao;
 
     @Autowired
-    protected SectorSystemDao sectorSystem;
+    protected SectorSystemDao sectorSystemDao;
+
+    @Autowired
+    protected UnapprovedCharacterDao unapprovedCharacterDao;
 
     public static final String userSessionKey = "user_id";
 
