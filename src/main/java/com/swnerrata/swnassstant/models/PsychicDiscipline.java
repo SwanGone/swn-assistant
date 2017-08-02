@@ -12,9 +12,11 @@ public class PsychicDiscipline extends AbstractEntity {
 
     private String school;
 
+    private int level;
+
     private String description;
 
-    PsychicDiscipline() { }
+    public PsychicDiscipline() { }
 
     public String getName() { return name; }
 
@@ -23,6 +25,10 @@ public class PsychicDiscipline extends AbstractEntity {
     public String getSchool() { return school; }
 
     public void setSchool(String school) { this.school = school; }
+
+    public int getLevel() { return level; }
+
+    public void setLevel(int level) { this.level = level; }
 
     public String getDescription() { return description; }
 

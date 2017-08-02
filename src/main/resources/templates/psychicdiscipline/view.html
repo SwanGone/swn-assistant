@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:object="${psychicDiscipline}">
+    <h1 th:text="*{name}">Gear Name</h1>
+    <ul>
+        <li th:text="'Name: ' + *{name}">Gear Type</li>
+        <li th:text="'School: ' + *{school}">School</li>
+        <li th:text="'Level: ' + *{level}">Level</li>
+        <li th:text="'Description: ' + *{description}">Description</li>
+    </ul>
+
+    <a th:href="'/psychicdiscpline/edit/' + *{uid}">Edit Discipline</a>
+</div>
+
+</body>
+</html>

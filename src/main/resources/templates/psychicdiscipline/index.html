@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+This is where you will be able to view, create and update Psychic Discipline.
+<h1>Psychic Discipline</h1>
+<ul>
+   <li th:each="psychicdiscipline : ${psychicdisciplines}">
+       <a th:href="'/psychicdiscipline/view/' + ${psychicdiscipline.uid}" th:text="${psychicdiscipline.name}"></a>
+   </li>
+</ul>
+</body>
+</html>
