@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+This is where you will be able to view, create and update Gear.
+<h1>List Of Skills</h1>
+<ul>
+   <li th:each="skill : ${skills}">
+       <a th:href="'/skill/view/' + ${skill.uid}" th:text="${skill.name}"></a>
+   </li>
+</ul>
+</body>
+</html>

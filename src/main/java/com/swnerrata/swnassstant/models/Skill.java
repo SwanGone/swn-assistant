@@ -10,7 +10,7 @@ public class Skill extends AbstractEntity {
 
     private String name;
 
-    Skill() { }
+    public Skill() { }
 
     public String getName() { return name; }
 
