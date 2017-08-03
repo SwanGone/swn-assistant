@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.GameCharacter;
+import com.swnerrata.swnassstant.models.data.GameCharacterDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,7 +23,7 @@ public class GameCharacterController extends AbstractController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("gamecharacters", gameCharacterDao.findByApproved(true));
+        model.addAttribute("gamecharacters", gameCharacterDao.findByApprovedAndAncestor(true, false));
         return "/characters/index";
     }
 
@@ -41,6 +42,9 @@ public class GameCharacterController extends AbstractController {
             return "characters/create";
         }
 
+
+        gameCharacterDao.save(gameCharacter);
+        gameCharacter.setUidToEdit(gameCharacter.getUid());
         gameCharacterDao.save(gameCharacter);
 
         return "redirect:/characters";
@@ -66,7 +70,9 @@ public class GameCharacterController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{gameCharacterId}", method = RequestMethod.POST)
-    public String edit(Model model, @ModelAttribute @Valid GameCharacter gameCharacter, Errors errors, HttpServletRequest request) {
+    public String edit(Model model, @PathVariable int gameCharacterId,
+                       @ModelAttribute @Valid GameCharacter gameCharacter, Errors errors, HttpServletRequest request) {
+
 
 
         if (errors.hasErrors()) {
@@ -74,6 +80,9 @@ public class GameCharacterController extends AbstractController {
             return "characters/edit/" + gameCharacter.getUid();
         }
 
+
+        gameCharacterDao.save(gameCharacter);
+        gameCharacter.setUidToEdit(gameCharacterId);
         gameCharacterDao.save(gameCharacter);
 
         return "redirect:/characters";

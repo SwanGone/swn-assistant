@@ -16,6 +16,10 @@ public abstract class AbstractEntity {
 
     private boolean approved = false;
 
+    private boolean ancestor = false;
+
+    private int uidToEdit;
+
     public int getUid() {
         return this.uid;
     }
@@ -32,4 +36,19 @@ public abstract class AbstractEntity {
         this.approved = approved;
     }
 
+    public boolean isAncestor() {
+        return ancestor;
+    }
+
+    public void setAncestor(boolean ancestor) {
+        this.ancestor = ancestor;
+    }
+
+    public int getUidToEdit() {
+        return uidToEdit;
+    }
+
+    public void setUidToEdit(int uidToEdit) {
+        this.uidToEdit = uidToEdit;
+    }
 }
