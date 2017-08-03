@@ -31,4 +31,5 @@ public abstract class AbstractEntity {
     public void setApproved(boolean approved) {
         this.approved = approved;
     }
+
 }

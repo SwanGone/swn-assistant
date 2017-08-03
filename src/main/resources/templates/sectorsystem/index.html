@@ -1,14 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head"></head>
+<head>
+    <style>
+        .hex {
+    float: left;
+    margin-right: -26px;
+    margin-bottom: -50px;
+}
+.hex .left {
+    float: left;
+    width: 0;
+    border-right: 30px solid #6C6;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+}
+.hex .middle {
+    float: left;
+    width: 60px;
+    height: 104px;
+    background: #6C6;
+}
+.hex .right {
+    float: left;
+    width: 0;
+    border-left: 30px solid #6C6;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+}
+.hex-row {
+    clear: left;
+}
+div.hex:nth-child(2n){
+    margin-top: 53px;
+}
+.sector {
+  margin: 100px;
+}
+    </style>
+</head>
 <body>
-This is where you will be able to view, create and update Systems.
-<h1>List Of Systems</h1>
-<ul>
-   <li th:each="sectorsystem : ${sectorsystems}">
-       <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">System Grid Coordinates - System Name</a>
-   </li>
-</ul>
+<h1>Sector Map</h1>
+<div class="sector">
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${firstrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${secondrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${thirdrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${fourthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${fifthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${sixthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${seventhrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${eighthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${ninthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+    <div class="hex-row">
+        <div class="hex" th:each="sectorsystem : ${tenthrow}">
+            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <div class="left"></div>
+            <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
+            <div class="right"></div>
+            </a>
+        </div>
+    </div>
+</div>
 <a href="/sectorsystem/create">Create System</a>
 </body>
 </html>

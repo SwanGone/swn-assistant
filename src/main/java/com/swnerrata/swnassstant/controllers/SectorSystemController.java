@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by seanburk on 7/28/17.
@@ -23,7 +28,17 @@ public class SectorSystemController extends AbstractController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("sectorsystems", sectorSystemDao.findAll());
+        model.addAttribute("firstrow", sectorSystemDao.findByRowNumber("000"));
+        model.addAttribute("secondrow", sectorSystemDao.findByRowNumber("001"));
+        model.addAttribute("thirdrow", sectorSystemDao.findByRowNumber("002"));
+        model.addAttribute("fourthrow", sectorSystemDao.findByRowNumber("003"));
+        model.addAttribute("fifthrow", sectorSystemDao.findByRowNumber("004"));
+        model.addAttribute("sixthrow", sectorSystemDao.findByRowNumber("005"));
+        model.addAttribute("seventhrow", sectorSystemDao.findByRowNumber("006"));
+        model.addAttribute("eighthrow", sectorSystemDao.findByRowNumber("007"));
+        model.addAttribute("ninthrow", sectorSystemDao.findByRowNumber("008"));
+        model.addAttribute("tenthrow", sectorSystemDao.findByRowNumber("009"));
+
         return "/sectorsystem/index";
     }
 

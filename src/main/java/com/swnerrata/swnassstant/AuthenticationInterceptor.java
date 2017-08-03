@@ -35,8 +35,9 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             if (userId != null) {
                 user = userDao.findOne(userId);
 
-                if (user != null)
+                if (user != null) {
                     isLoggedIn = true;
+                }
             }
 
             // If user not logged in, redirect to login page
