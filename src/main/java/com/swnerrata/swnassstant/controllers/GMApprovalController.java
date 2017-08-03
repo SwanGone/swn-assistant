@@ -3,11 +3,9 @@ package com.swnerrata.swnassstant.controllers;
 import com.swnerrata.swnassstant.models.GameCharacter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 /**
  * Created by seanburk on 8/3/17.
