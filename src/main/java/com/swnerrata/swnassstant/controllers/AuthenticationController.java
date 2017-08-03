@@ -46,10 +46,12 @@ public class AuthenticationController extends AbstractController {
         }
 
         User newUser = new User(form.getUsername(), form.getPassword());
-        if (form.getGameMaster().equals("true")) {      //This is very wonky but works
+        if (form.isGameMaster()) {      //This is very wonky but works
            newUser.setGameMaster(true);
+           userDao.save(newUser);
+        } else {
+            userDao.save(newUser);
         }
-        userDao.save(newUser);
 
         setUserInSession(request.getSession(), newUser);
 
