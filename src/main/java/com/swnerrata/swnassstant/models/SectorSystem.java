@@ -11,12 +11,10 @@ import java.util.List;
 @Entity
 public class SectorSystem extends AbstractEntity {
 
-    private String name;
+    private String name = "";
 
-    @Size(min=3,max=3)
     private String rowNumber;
 
-    @Size(min=1,max=1)
     private String colNumber;
 
     @OneToMany
@@ -24,6 +22,11 @@ public class SectorSystem extends AbstractEntity {
     private List<Planet> planetsInSystem = new ArrayList<>();
 
     public SectorSystem() { }
+
+    public SectorSystem(String rowNumber, String colNumber) {
+        this.rowNumber = rowNumber;
+        this.colNumber = colNumber;
+    }
 
     public String getName() {
         return name;

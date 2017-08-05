@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.models.data;
 
 import com.swnerrata.swnassstant.models.SectorSystem;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

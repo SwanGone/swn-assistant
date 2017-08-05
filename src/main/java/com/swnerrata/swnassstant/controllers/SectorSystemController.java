@@ -2,6 +2,7 @@ package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.SectorSystem;
 import com.swnerrata.swnassstant.models.Skill;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,13 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by seanburk on 7/28/17.
@@ -28,16 +27,17 @@ public class SectorSystemController extends AbstractController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("firstrow", sectorSystemDao.findByRowNumber("000"));
-        model.addAttribute("secondrow", sectorSystemDao.findByRowNumber("001"));
-        model.addAttribute("thirdrow", sectorSystemDao.findByRowNumber("002"));
-        model.addAttribute("fourthrow", sectorSystemDao.findByRowNumber("003"));
-        model.addAttribute("fifthrow", sectorSystemDao.findByRowNumber("004"));
-        model.addAttribute("sixthrow", sectorSystemDao.findByRowNumber("005"));
-        model.addAttribute("seventhrow", sectorSystemDao.findByRowNumber("006"));
-        model.addAttribute("eighthrow", sectorSystemDao.findByRowNumber("007"));
-        model.addAttribute("ninthrow", sectorSystemDao.findByRowNumber("008"));
-        model.addAttribute("tenthrow", sectorSystemDao.findByRowNumber("009"));
+
+        model.addAttribute("firstrow", sectorSystemDao.findByRowNumber("0"));
+        model.addAttribute("secondrow", sectorSystemDao.findByRowNumber("1"));
+        model.addAttribute("thirdrow", sectorSystemDao.findByRowNumber("2"));
+        model.addAttribute("fourthrow", sectorSystemDao.findByRowNumber("3"));
+        model.addAttribute("fifthrow", sectorSystemDao.findByRowNumber("4"));
+        model.addAttribute("sixthrow", sectorSystemDao.findByRowNumber("5"));
+        model.addAttribute("seventhrow", sectorSystemDao.findByRowNumber("6"));
+        model.addAttribute("eighthrow", sectorSystemDao.findByRowNumber("7"));
+        model.addAttribute("ninthrow", sectorSystemDao.findByRowNumber("8"));
+        model.addAttribute("tenthrow", sectorSystemDao.findByRowNumber("9"));
 
         return "/sectorsystem/index";
     }
@@ -75,7 +75,7 @@ public class SectorSystemController extends AbstractController {
     public String displayEditForm(Model model, @PathVariable int sectorSystemId) {
 
         SectorSystem sectorSystem = sectorSystemDao.findOne(sectorSystemId);
-        model.addAttribute("sectorSystem", sectorSystemId);
+        model.addAttribute("sectorSystem", sectorSystem);
         model.addAttribute("title", "Edit System");
 
         return "sectorsystem/edit";

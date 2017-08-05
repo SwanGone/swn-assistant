@@ -43,7 +43,7 @@ div.hex:nth-child(2n){
 <div class="sector">
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${firstrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -52,7 +52,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${secondrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -61,7 +61,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${thirdrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -70,7 +70,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${fourthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -79,7 +79,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${fifthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -88,7 +88,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${sixthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -97,7 +97,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${seventhrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -106,7 +106,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${eighthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -115,7 +115,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${ninthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -124,7 +124,7 @@ div.hex:nth-child(2n){
     </div>
     <div class="hex-row">
         <div class="hex" th:each="sectorsystem : ${tenthrow}">
-            <a href="'/sectorsystem/view/' + ${sectorsystem.uid}">
+            <a th:href="'/sectorsystem/view/' + ${sectorsystem.uid}">
             <div class="left"></div>
             <div class="middle" th:text="${sectorsystem.colNumber} + '' + ${sectorsystem.rowNumber} + ' - ' + ${sectorsystem.name}">0000</div>
             <div class="right"></div>
@@ -132,6 +132,5 @@ div.hex:nth-child(2n){
         </div>
     </div>
 </div>
-<a href="/sectorsystem/create">Create System</a>
 </body>
 </html>
