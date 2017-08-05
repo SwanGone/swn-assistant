@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.GameCharacter;
+import com.swnerrata.swnassstant.models.User;
 import com.swnerrata.swnassstant.models.data.GameCharacterDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,8 @@ public class GameCharacterController extends AbstractController {
             return "characters/create";
         }
 
+        User owner = getUserFromSession(request.getSession());
+        gameCharacter.setOwner(owner);
 
         gameCharacterDao.save(gameCharacter);
         gameCharacter.setUidToEdit(gameCharacter.getUid());

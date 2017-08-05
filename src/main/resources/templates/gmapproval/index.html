@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1>Characters</h1>
+<h1>Characters Changes</h1>
 <ul>
     <li th:each="character : ${unapprovedcharacters}">
-        <a th:href="'/gmapproval/characterapproval/' + ${character.uid}" th:text="${character.name}"></a>
+        <a th:href="'/gmapproval/characterapproval/' + ${character.uid}"
+           th:text="${character.name}"></a>
     </li>
 </ul>
 </body>

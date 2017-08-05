@@ -3,8 +3,12 @@ package com.swnerrata.swnassstant.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by seanburk on 7/27/17.
@@ -30,6 +34,10 @@ public class User extends AbstractEntity {
         this.pwHash = hashPassword(password);
     }
 
+    @OneToMany
+    @JoinColumn(name = "owner_uid")
+    private List<GameCharacter> gameCharactersOwned = new ArrayList<>();
+
     public String getUsername() {
         return username;
     }
@@ -50,4 +58,7 @@ public class User extends AbstractEntity {
         this.gameMaster = gameMaster;
     }
 
+    public void addGameCharacter(GameCharacter gameCharacter) { gameCharactersOwned.add(gameCharacter); }
+
+    public List<GameCharacter> getGameCharactersOwned() { return gameCharactersOwned; }
 }

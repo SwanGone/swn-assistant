@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -48,6 +49,9 @@ public class GameCharacter extends AbstractEntity {
     private ArrayList<PsychicDiscipline> psychicDisciplinesKnown;
 
     private ArrayList<PsychicDiscipline> psychicDisciplinesMastered;
+
+    @ManyToOne
+    User owner;
 
 
     //Constructors
@@ -140,4 +144,8 @@ public class GameCharacter extends AbstractEntity {
     public void setPsychicDisciplinesMastered(ArrayList<PsychicDiscipline> psychicDisciplinesMastered) {
         this.psychicDisciplinesMastered = psychicDisciplinesMastered;
     }
+
+    public User getOwner() { return owner; }
+
+    public void setOwner(User owner) { this.owner = owner; }
 }
