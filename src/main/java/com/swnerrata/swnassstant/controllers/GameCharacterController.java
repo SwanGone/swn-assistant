@@ -2,7 +2,6 @@ package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.GameCharacter;
 import com.swnerrata.swnassstant.models.User;
-import com.swnerrata.swnassstant.models.data.GameCharacterDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -63,31 +62,43 @@ public class GameCharacterController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{gameCharacterId}")
-    public String displayEditForm(Model model, @PathVariable int gameCharacterId) {
-
+    public String displayEditForm(Model model, @PathVariable int gameCharacterId, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
         GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
-        model.addAttribute("gameCharacter", gameCharacter);
-        model.addAttribute("title", "Edit Character");
+        if (user.isGameMaster() || gameCharacter.getOwner().equals(user)) {
 
-        return "characters/edit";
+            model.addAttribute("gameCharacter", gameCharacter);
+            model.addAttribute("title", "Edit Character");
+
+            return "characters/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{gameCharacterId}", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable int gameCharacterId,
                        @ModelAttribute @Valid GameCharacter gameCharacter, Errors errors, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
+        GameCharacter gameCharacterOwned = gameCharacterDao.findOne(gameCharacterId);
+        if (user.isGameMaster() || gameCharacterOwned.getOwner().equals(user)) {
+
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "characters/edit/" + gameCharacter.getUid();
+            }
 
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "characters/edit/" + gameCharacter.getUid();
+            gameCharacterDao.save(gameCharacter);
+            gameCharacter.setUidToEdit(gameCharacterId);
+            gameCharacter.setOwner(user);
+            gameCharacterDao.save(gameCharacter);
+
+            return "redirect:/characters";
+
+        } else {
+            return "redirect:/nopeeking";
         }
-
-
-        gameCharacterDao.save(gameCharacter);
-        gameCharacter.setUidToEdit(gameCharacterId);
-        gameCharacterDao.save(gameCharacter);
-
-        return "redirect:/characters";
     }
 }
