@@ -24,6 +24,12 @@ public class AuthenticationController extends AbstractController {
         model.addAttribute("title", "SWN Assistant");
         return "index";
     }
+
+    @RequestMapping(value = "nopeeking")
+    public String nopeeking(Model model) {
+        model.addAttribute("title", "NO PEEKING BEHIND THE SCREEN");
+        return "nopeeking";
+    }
     @RequestMapping(value = "/register")
     public String registerForm(Model model) {
         model.addAttribute(new RegisterForm());
