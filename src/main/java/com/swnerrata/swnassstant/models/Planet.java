@@ -29,7 +29,7 @@ public class Planet extends AbstractEntity {
     @ManyToOne
     private SectorSystem sectorSystem;
 
-    Planet() { }
+    public Planet() { }
 
     public String getName() {
         return name;

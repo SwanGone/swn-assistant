@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface PlanetDao extends CrudRepository<Planet, Integer> {
 
-    List<Planet> findByApproved(boolean approved);
+    List<Planet> findByApprovedAndAncestor(boolean approved, boolean ancestor);
 }

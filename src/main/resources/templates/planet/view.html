@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:object="${planet}">
+    <h1 th:text="*{name}">Planet Name</h1>
+    <ul>
+        <li th:text="'Population: ' + *{population}">Population</li>
+        <li th:text="'Tech Level: ' + *{techLevel}">Tech Level</li>
+        <li th:text="'Culture Notes: \n' + *{cultureNotes}">Culture Notes</li>
+    </ul>
+
+
+    <a th:href="'/planet/edit/' + ${planet.uid}">Edit Planet</a>
+</div>
+
+</body>
+</html>
