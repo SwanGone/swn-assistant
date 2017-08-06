@@ -2,18 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
+        body {
+        background: linear-gradient(to bottom right, red, yellow);;
+        }
+
+        a {
+        color: hotpink;
+        }
+
         .hex {
         float: left;
         margin-right: -26px;
         margin-bottom: -50px;
         }
+
         .hexLink{
         overflow: hidden;
         }
+
         .hex .left {
             float: left;
             width: 0;
-            border-right: 30px solid #6C6;
+            border-right: 30px solid black;
             border-top: 52px solid transparent;
             border-bottom: 52px solid transparent;
         }
@@ -21,12 +31,12 @@
             float: left;
             width: 60px;
             height: 104px;
-            background: #6C6;
+            background: black;
         }
         .hex .right {
             float: left;
             width: 0;
-            border-left: 30px solid #6C6;
+            border-left: 30px solid black;
             border-top: 52px solid transparent;
             border-bottom: 52px solid transparent;
         }
@@ -47,7 +57,7 @@
         .hex h1, .hex p {
           width: 100%;
           box-sizing:border-box;
-          background-color:#6C6;
+          background-color:black;
           font-weight: 300;
           -webkit-transition:  -webkit-transform .2s ease-out, opacity .3s ease-out;
                   transition:          transform .2s ease-out, opacity .3s ease-out;

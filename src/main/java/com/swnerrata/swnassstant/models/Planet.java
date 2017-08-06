@@ -94,4 +94,12 @@ public class Planet extends AbstractEntity {
     public void setCultureNotes(String cultureNotes) {
         this.cultureNotes = cultureNotes;
     }
+
+    public SectorSystem getSectorSystem() {
+        return sectorSystem;
+    }
+
+    public void setSectorSystem(SectorSystem sectorSystem) {
+        this.sectorSystem = sectorSystem;
+    }
 }

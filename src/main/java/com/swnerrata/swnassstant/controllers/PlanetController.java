@@ -1,6 +1,5 @@
 package com.swnerrata.swnassstant.controllers;
 
-import com.swnerrata.swnassstant.models.GameCharacter;
 import com.swnerrata.swnassstant.models.Planet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,7 @@ public class PlanetController extends AbstractController {
 
     @RequestMapping(value = "/create")
     public String createForm(Model model) {
+        model.addAttribute("sectors", sectorSystemDao.findAll());
         model.addAttribute(new Planet());
         model.addAttribute("title", "Create Planet");
         return "planet/create";
@@ -38,7 +38,7 @@ public class PlanetController extends AbstractController {
     public String create(Model model, @ModelAttribute @Valid Planet planet, Errors errors, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Create Planet");
+            model.addAttribute("title", "Errorss Planet");
             return "planet/create";
         }
 

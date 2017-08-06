@@ -29,6 +29,7 @@ public class GameCharacterController extends AbstractController {
 
     @RequestMapping(value = "/create")
     public String createForm(Model model) {
+        model.addAttribute("gear", gearDao.findAll());
         model.addAttribute(new GameCharacter());
         model.addAttribute("title", "Create GameCharacter");
         return "characters/create";

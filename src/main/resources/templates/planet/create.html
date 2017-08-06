@@ -10,6 +10,16 @@
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
+        <label th:for="sectorSystem">In system:</label>
+        <select th:field="*{sectorSystem}">
+            <option th:each="sector : ${sectors}"
+                    th:value="${sector.uid}"
+                    th:text="${sector.colNumber} + '' + ${sector.rowNumber} + ' - ' + ${sector.name}">
+            </option>
+        </select>
+        <span th:errors="*{sectorSystem}" class="error"></span>
+    </div>
+    <div class="form-group">
         <label th:for="techLevel">Tech Level</label>
         <input class="form-control" th:field="*{techLevel}" />
         <span th:errors="*{techLevel}" class="error"></span>

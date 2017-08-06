@@ -2,11 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">My Cheeses</title>
+    <title th:text="${title}">SWN Assistant</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <style>
+        body {
+        background: linear-gradient(to bottom right, red, yellow);
+        }
+    </style>
 </head>
 <body>
 <div th:fragment="navigation">
