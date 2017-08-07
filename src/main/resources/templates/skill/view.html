@@ -8,7 +8,10 @@
 <div th:object="${skill}">
     <h1 th:text="*{name}">Skill Name</h1>
 
-    <a th:href="'/skill/edit/' + ${skill.uid}">Edit Skill</a>
+    <div th:if="${user.isGameMaster()}">
+        <a th:href="'/skill/edit/' + ${skill.uid}">Edit Skill</a>
+    </div>
+
 </div>
 
 </body>

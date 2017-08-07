@@ -58,8 +58,9 @@ public class PsychicDisciplineController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{psychicDisciplineId}", method = RequestMethod.GET)
-    public String viewPsychicDiscipline(Model model, @PathVariable int psychicDisciplineId) {
+    public String viewPsychicDiscipline(Model model, @PathVariable int psychicDisciplineId, HttpServletRequest request) {
 
+        model.addAttribute("user", getUserFromSession(request.getSession()));
         PsychicDiscipline psychicDiscipline  = psychicDisciplineDao.findOne(psychicDisciplineId);
         model.addAttribute("psychicDiscipline", psychicDiscipline);
 

@@ -12,7 +12,10 @@
         <li><a th:href="'/planet/view/' + ${planet.uid}" th:each="planet : *{planetsInSystem}" th:text="${planet.name}"></a></li>
     </ul>
 
-    <a th:href="'/sectorsystem/edit/' + *{uid}">Edit System</a>
+    <div th:if="${user.isGameMaster()}">
+        <a th:href="'/sectorsystem/edit/' + *{uid}">Edit System</a>
+    </div>
+
 </div>
 
 </body>

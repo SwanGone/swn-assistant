@@ -14,7 +14,9 @@
         <li th:text="'Description: ' + *{description}">Description</li>
     </ul>
 
-    <a th:href="'/psychicdiscipline/edit/' + *{uid}">Edit Discipline</a>
+    <div th:if="${user.isGameMaster()}">
+        <a th:href="'/psychicdiscipline/edit/' + *{uid}">Edit Discipline</a>
+    </div>
 </div>
 
 </body>

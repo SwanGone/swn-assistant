@@ -61,10 +61,10 @@ public class GearController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{gearId}", method = RequestMethod.GET)
-    public String viewGameCharacter(Model model, @PathVariable int gearId) {
+    public String viewGameCharacter(Model model, @PathVariable int gearId, HttpServletRequest request) {
 
-        Gear gear = gearDao.findOne(gearId);
-        model.addAttribute("gear", gear);
+        model.addAttribute("user", getUserFromSession(request.getSession()));
+        model.addAttribute("gear", gearDao.findOne(gearId));
 
         return "gear/view";
     }

@@ -60,8 +60,9 @@
         </div>
     </div>
 
+    <div th:if="${isOwnerOrGM}">
         <a th:href="'/characters/edit/' + ${gamecharacter.uid}">Edit Character</a>
-
+    </div>
 </div>
 
 </body>

@@ -58,8 +58,9 @@ public class PlanetController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{planetId}", method = RequestMethod.GET)
-    public String viewPlanet(Model model, @PathVariable int planetId) {
+    public String viewPlanet(Model model, @PathVariable int planetId, HttpServletRequest request) {
 
+        model.addAttribute("user", getUserFromSession(request.getSession()));
         Planet planet = planetDao.findOne(planetId);
         model.addAttribute("planet", planet);
         model.addAttribute("title", "Edit Planet");

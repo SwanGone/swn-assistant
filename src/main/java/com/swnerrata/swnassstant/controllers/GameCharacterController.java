@@ -57,6 +57,7 @@ public class GameCharacterController extends AbstractController {
 
         User user = getUserFromSession(request.getSession());
         GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
+        model.addAttribute("isOwnerOrGM", user.isGameMaster() || user.equals(gameCharacter.getOwner()));
         model.addAttribute("gamecharacter", gameCharacter);
 
         return "characters/view";

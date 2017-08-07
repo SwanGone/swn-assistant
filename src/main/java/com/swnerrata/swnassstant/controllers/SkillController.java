@@ -59,8 +59,9 @@ public class SkillController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{skillId}", method = RequestMethod.GET)
-    public String viewSkill(Model model, @PathVariable int skillId) {
+    public String viewSkill(Model model, @PathVariable int skillId, HttpServletRequest request) {
 
+        model.addAttribute("user", getUserFromSession(request.getSession()));
         Skill skill = skillDao.findOne(skillId);
         model.addAttribute("skill", skill);
 

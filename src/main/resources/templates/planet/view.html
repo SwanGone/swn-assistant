@@ -16,7 +16,10 @@
     </ul>
 
 
-    <a th:href="'/planet/edit/' + ${planet.uid}">Edit Planet</a>
+    <div th:if="${user.isGameMaster()}">
+        <a th:href="'/planet/edit/' + ${planet.uid}">Edit Planet</a>
+    </div>
+
 </div>
 
 </body>

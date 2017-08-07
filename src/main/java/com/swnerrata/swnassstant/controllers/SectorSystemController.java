@@ -77,8 +77,9 @@ public class SectorSystemController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{sectorSystemId}", method = RequestMethod.GET)
-    public String viewSystem(Model model, @PathVariable int sectorSystemId) {
+    public String viewSystem(Model model, @PathVariable int sectorSystemId, HttpServletRequest request) {
 
+        model.addAttribute("user", getUserFromSession(request.getSession()));
         SectorSystem sectorSystem = sectorSystemDao.findOne(sectorSystemId);
         model.addAttribute("sectorSystem", sectorSystem);
 

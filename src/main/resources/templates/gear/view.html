@@ -12,7 +12,9 @@
         <li th:text="'Description: ' + *{description}">Description</li>
     </ul>
 
-    <a th:href="'/gear/edit/' + ${gear.uid}">Edit Gear</a>
+    <div th:if="${user.isGameMaster()}">
+        <a th:href="'/gear/edit/' + ${gear.uid}">Edit Gear</a>
+    </div>
 </div>
 
 </body>
