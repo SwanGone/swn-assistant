@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <div th:object="${psychicDiscipline}">
     <h1 th:text="*{name}">Gear Name</h1>
     <ul>
@@ -11,7 +14,7 @@
         <li th:text="'Description: ' + *{description}">Description</li>
     </ul>
 
-    <a th:href="'/psychicdiscpline/edit/' + *{uid}">Edit Discipline</a>
+    <a th:href="'/psychicdiscipline/edit/' + *{uid}">Edit Discipline</a>
 </div>
 
 </body>

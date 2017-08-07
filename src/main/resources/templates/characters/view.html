@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <div th:object="${gamecharacter}">
     <div class="well well-sm">
         <div class="row">
@@ -57,7 +60,8 @@
         </div>
     </div>
 
-    <a th:href="'/characters/edit/' + ${gamecharacter.uid}">Edit Character</a>
+        <a th:href="'/characters/edit/' + ${gamecharacter.uid}">Edit Character</a>
+
 </div>
 
 </body>

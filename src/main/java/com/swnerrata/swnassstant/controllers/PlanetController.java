@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.Planet;
+import com.swnerrata.swnassstant.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -37,18 +38,23 @@ public class PlanetController extends AbstractController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute @Valid Planet planet, Errors errors, HttpServletRequest request) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errorss Planet");
-            return "planet/create";
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errorss Planet");
+                return "planet/create";
+            }
+
+
+            planetDao.save(planet);
+            planet.setUidToEdit(planet.getUid());
+            planet.setApproved(true);
+            planetDao.save(planet);
+
+            return "redirect:/planet";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-
-        planetDao.save(planet);
-        planet.setUidToEdit(planet.getUid());
-        planet.setApproved(true);
-        planetDao.save(planet);
-
-        return "redirect:/planet";
     }
 
     @RequestMapping(value = "view/{planetId}", method = RequestMethod.GET)
@@ -62,35 +68,43 @@ public class PlanetController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{planetId}")
-    public String displayEditForm(Model model, @PathVariable int planetId) {
+    public String displayEditForm(Model model, @PathVariable int planetId, HttpServletRequest request) {
 
-        Planet planet = planetDao.findOne(planetId);
-        model.addAttribute("planet", planet);
-        model.addAttribute("title", "Edit Planet");
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            model.addAttribute("sectors", sectorSystemDao.findAll());
+            model.addAttribute("planet", planetDao.findOne(planetId));
+            model.addAttribute("title", "Edit Planet");
 
-        return "planet/edit";
+            return "planet/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{planetId}", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable int planetId,
                        @ModelAttribute @Valid Planet planet, Errors errors, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "planet/edit/" + planet.getUid();
+            }
 
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "planet/edit/" + planet.getUid();
+            Planet originalplanet = planetDao.findOne(planetId);
+            planetDao.save(planet);
+            planet.setUidToEdit(planetId);
+            originalplanet.setAncestor(true);
+            planet.setApproved(true);
+            planetDao.save(planet);
+            planetDao.save(originalplanet);
+
+            return "redirect:/planet";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-
-
-        Planet originalplanet = planetDao.findOne(planetId);
-        planetDao.save(planet);
-        planet.setUidToEdit(planetId);
-        originalplanet.setAncestor(true);
-        planet.setApproved(true);
-        planetDao.save(planet);
-
-        return "redirect:/planet";
     }
 }

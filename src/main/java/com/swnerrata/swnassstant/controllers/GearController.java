@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.Gear;
+import com.swnerrata.swnassstant.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,23 +28,36 @@ public class GearController extends AbstractController {
     }
 
     @RequestMapping(value = "/create")
-    public String createForm(Model model) {
-        model.addAttribute(new Gear());
-        model.addAttribute("title", "Create Gear");
-        return "gear/create";
+    public String createForm(Model model, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            model.addAttribute(new Gear());
+            model.addAttribute("title", "Create Gear");
+            return "gear/create";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute @Valid Gear gear, Errors errors, HttpServletRequest request) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Create Gear");
-            return "gear/create";
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Create Gear");
+                return "gear/create";
+            }
+
+            gearDao.save(gear);
+            gear.setUidToEdit(gear.getUid());
+            gear.setApproved(true);
+            gearDao.save(gear);
+
+            return "redirect:/gear";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        gearDao.save(gear);
-
-        return "redirect:/gear";
     }
 
     @RequestMapping(value = "view/{gearId}", method = RequestMethod.GET)
@@ -56,26 +70,41 @@ public class GearController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{gearId}")
-    public String displayEditForm(Model model, @PathVariable int gearId) {
+    public String displayEditForm(Model model, @PathVariable int gearId, HttpServletRequest request) {
 
-        Gear gear = gearDao.findOne(gearId);
-        model.addAttribute("gear", gear);
-        model.addAttribute("title", "Edit Gear");
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            Gear gear = gearDao.findOne(gearId);
+            model.addAttribute("gear", gear);
+            model.addAttribute("title", "Edit Gear");
 
-        return "gear/edit";
+            return "gear/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{gearId}", method = RequestMethod.POST)
-    public String edit(Model model, @ModelAttribute @Valid Gear gear, Errors errors, HttpServletRequest request) {
+    public String edit(Model model,@PathVariable int gearId, @ModelAttribute @Valid Gear gear, Errors errors, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "gear/edit/" + gear.getUid();
+            }
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "gear/edit/" + gear.getUid();
+            Gear originalGear = gearDao.findOne(gearId);
+            gearDao.save(gear);
+            gear.setUidToEdit(gearId);
+            originalGear.setAncestor(true);
+            gear.setApproved(true);
+            gearDao.save(gear);
+            gearDao.save(originalGear);
+
+            return "redirect:/gear";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        gearDao.save(gear);
-
-        return "redirect:/gear";
     }
 }

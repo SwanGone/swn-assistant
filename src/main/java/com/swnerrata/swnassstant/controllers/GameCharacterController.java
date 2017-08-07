@@ -53,8 +53,9 @@ public class GameCharacterController extends AbstractController {
     }
 
     @RequestMapping(value = "view/{gameCharacterId}", method = RequestMethod.GET)
-    public String viewGameCharacter(Model model, @PathVariable int gameCharacterId) {
+    public String viewGameCharacter(Model model, @PathVariable int gameCharacterId, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
         GameCharacter gameCharacter = gameCharacterDao.findOne(gameCharacterId);
         model.addAttribute("gamecharacter", gameCharacter);
 

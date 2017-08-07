@@ -50,4 +50,5 @@ public abstract class AbstractController {
     public Integer getUserIdFromSession(HttpServletRequest request) {
         return (Integer) request.getSession().getAttribute(userSessionKey);
     }
+
 }

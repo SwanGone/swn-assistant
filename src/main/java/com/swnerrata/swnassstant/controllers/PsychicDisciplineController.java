@@ -1,6 +1,7 @@
 package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.PsychicDiscipline;
+import com.swnerrata.swnassstant.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,23 +28,33 @@ public class PsychicDisciplineController extends AbstractController {
     }
 
     @RequestMapping(value = "/create")
-    public String createForm(Model model) {
-        model.addAttribute(new PsychicDiscipline());
-        model.addAttribute("title", "Create Discipline");
-        return "psychicdiscipline/create";
+    public String createForm(Model model, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            model.addAttribute(new PsychicDiscipline());
+            model.addAttribute("title", "Create Discipline");
+            return "psychicdiscipline/create";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute @Valid PsychicDiscipline psychicDiscipline, Errors errors, HttpServletRequest request) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Create Discipline");
-            return "psychicdiscipline/create";
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Create Discipline");
+                return "psychicdiscipline/create";
+            }
+
+            psychicDisciplineDao.save(psychicDiscipline);
+
+            return "redirect:/psychicdiscipline";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        psychicDisciplineDao.save(psychicDiscipline);
-
-        return "redirect:/psychicdiscipline";
     }
 
     @RequestMapping(value = "view/{psychicDisciplineId}", method = RequestMethod.GET)
@@ -56,27 +67,41 @@ public class PsychicDisciplineController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{psychicDisciplineId}")
-    public String displayEditForm(Model model, @PathVariable int psychicDisciplineId) {
+    public String displayEditForm(Model model, @PathVariable int psychicDisciplineId, HttpServletRequest request) {
 
-        PsychicDiscipline psychicDiscipline = psychicDisciplineDao.findOne(psychicDisciplineId);
-        model.addAttribute("psychicDiscipline", psychicDiscipline);
-        model.addAttribute("title", "Edit Discipline");
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            PsychicDiscipline psychicDiscipline = psychicDisciplineDao.findOne(psychicDisciplineId);
+            model.addAttribute("psychicDiscipline", psychicDiscipline);
+            model.addAttribute("title", "Edit Discipline");
 
-        return "psychicdiscipline/edit";
+            return "psychicdiscipline/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{psychicDisciplineId}", method = RequestMethod.POST)
-    public String edit(Model model, @ModelAttribute @Valid PsychicDiscipline psychicDiscipline,
+    public String edit(Model model, @PathVariable int psychicDisciplineId, @ModelAttribute @Valid PsychicDiscipline psychicDiscipline,
                        Errors errors, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "psychicdscipline/edit/" + psychicDiscipline.getUid();
+            }
 
+            PsychicDiscipline originalPsychicDiscipline = psychicDisciplineDao.findOne(psychicDisciplineId);
+            psychicDisciplineDao.save(psychicDiscipline);
+            psychicDiscipline.setUidToEdit(psychicDisciplineId);
+            originalPsychicDiscipline.setAncestor(true);
+            psychicDiscipline.setApproved(true);
+            psychicDisciplineDao.save(psychicDiscipline);
+            psychicDisciplineDao.save(originalPsychicDiscipline);
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "psychicdscipline/edit/" + psychicDiscipline.getUid();
+            return "redirect:/psychicdiscipline";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        psychicDisciplineDao.save(psychicDiscipline);
-
-        return "redirect:/psychicdiscipline";
     }
 }

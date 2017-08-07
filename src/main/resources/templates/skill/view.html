@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <div th:object="${skill}">
     <h1 th:text="*{name}">Skill Name</h1>
 

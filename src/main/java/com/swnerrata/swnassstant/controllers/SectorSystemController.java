@@ -2,6 +2,7 @@ package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.SectorSystem;
 import com.swnerrata.swnassstant.models.Skill;
+import com.swnerrata.swnassstant.models.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,23 +44,36 @@ public class SectorSystemController extends AbstractController {
     }
 
     @RequestMapping(value = "/create")
-    public String createForm(Model model) {
-        model.addAttribute(new SectorSystem());
-        model.addAttribute("title", "Create System");
-        return "sectorsystem/create";
+    public String createForm(Model model, HttpServletRequest request) {
+
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            model.addAttribute(new SectorSystem());
+            model.addAttribute("title", "Create System");
+            return "sectorsystem/create";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute @Valid SectorSystem sectorSystem, Errors errors, HttpServletRequest request) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Create System");
-            return "sectorsystem/create";
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Create System");
+                return "sectorsystem/create";
+            }
+
+            sectorSystemDao.save(sectorSystem);
+            sectorSystem.setUidToEdit(sectorSystem.getUid());
+            sectorSystemDao.save(sectorSystem);
+
+            return "redirect:/sectorsystem";
+        } else {
+            return "redircet:/nopeeking";
         }
-
-        sectorSystemDao.save(sectorSystem);
-
-        return "redirect:/sectorsystem";
     }
 
     @RequestMapping(value = "view/{sectorSystemId}", method = RequestMethod.GET)
@@ -72,26 +86,41 @@ public class SectorSystemController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{sectorSystemId}")
-    public String displayEditForm(Model model, @PathVariable int sectorSystemId) {
+    public String displayEditForm(Model model, @PathVariable int sectorSystemId, HttpServletRequest request) {
 
-        SectorSystem sectorSystem = sectorSystemDao.findOne(sectorSystemId);
-        model.addAttribute("sectorSystem", sectorSystem);
-        model.addAttribute("title", "Edit System");
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            SectorSystem sectorSystem = sectorSystemDao.findOne(sectorSystemId);
+            model.addAttribute("sectorSystem", sectorSystem);
+            model.addAttribute("title", "Edit System");
 
-        return "sectorsystem/edit";
+            return "sectorsystem/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{sectorSystemId}", method = RequestMethod.POST)
-    public String edit(Model model, @ModelAttribute @Valid SectorSystem sectorSystem, Errors errors, HttpServletRequest request) {
+    public String edit(Model model,@PathVariable int sectorSystemId, @ModelAttribute @Valid SectorSystem sectorSystem, Errors errors, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "sectorsystem/edit/" + sectorSystem.getUid();
+            }
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "sectorsystem/edit/" + sectorSystem.getUid();
+            SectorSystem originalSectorSystem = sectorSystemDao.findOne(sectorSystemId);
+            sectorSystemDao.save(sectorSystem);
+            sectorSystem.setUidToEdit(sectorSystemId);
+            originalSectorSystem.setAncestor(true);
+            sectorSystem.setApproved(true);
+            sectorSystemDao.save(sectorSystem);
+            sectorSystemDao.save(originalSectorSystem);
+
+            return "redirect:/sectorsystem";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        sectorSystemDao.save(sectorSystem);
-
-        return "redirect:/sectorsystem";
     }
 }

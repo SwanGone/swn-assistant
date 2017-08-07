@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <form method="post">
     <h1>Change From:</h1>
     <div th:object="${originalgamecharacter}">

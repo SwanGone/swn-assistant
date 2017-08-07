@@ -2,12 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+
+<nav th:replace="fragments :: navigation"></nav>
+<br />
+<div class="well well-sm">
+    <h2>Create stuff</h2>
+    <nav>
+        <a href="/planets/create">|| Create a planet ||</a>
+        <a href="/gear/create">|| Create gear ||</a>
+        <a href="/skill/create">|| Create skill ||</a>
+        <a href="/psychicdiscipline/create">|| Create a psychic discipline ||</a>
+    </nav>
+</div>
 <h1>Characters Changes</h1>
-<ul>
-    <li th:each="character : ${unapprovedcharacters}">
-        <a th:href="'/gmapproval/characterapproval/' + ${character.uid}"
-           th:text="${character.name}"></a>
-    </li>
-</ul>
+<div th:unless="${unapprovedcharacters.size()}">
+    No changes to approve
+</div>
+<div th:if="${unapprovedcharacters}">
+    <ul>
+        <li th:each="character : ${unapprovedcharacters}">
+            <a th:href="'/gmapproval/characterapproval/' + ${character.uid}"
+               th:text="${character.name}"></a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

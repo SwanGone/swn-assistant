@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body class="container-fluid">
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <div th:object="${sectorSystem}">
     <h1 th:text="*{colNumber} + '' + *{rowNumber} + ' - ' + *{name}">System Name</h1>
+    <h2>Planets in system</h2>
+    <ul>
+        <li><a th:href="'/planet/view/' + ${planet.uid}" th:each="planet : *{planetsInSystem}" th:text="${planet.name}"></a></li>
+    </ul>
 
     <a th:href="'/sectorsystem/edit/' + *{uid}">Edit System</a>
 </div>

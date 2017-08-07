@@ -2,6 +2,7 @@ package com.swnerrata.swnassstant.controllers;
 
 import com.swnerrata.swnassstant.models.Gear;
 import com.swnerrata.swnassstant.models.Skill;
+import com.swnerrata.swnassstant.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,23 +29,33 @@ public class SkillController extends AbstractController {
     }
 
     @RequestMapping(value = "/create")
-    public String createForm(Model model) {
-        model.addAttribute(new Skill());
-        model.addAttribute("title", "Create Skill");
-        return "skill/create";
+    public String createForm(Model model, HttpServletRequest request) {
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            model.addAttribute(new Skill());
+            model.addAttribute("title", "Create Skill");
+            return "skill/create";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute @Valid Skill skill, Errors errors, HttpServletRequest request) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Create Skill");
-            return "skill/create";
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Create Skill");
+                return "skill/create";
+            }
+
+            skillDao.save(skill);
+
+            return "redirect:/skill";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        skillDao.save(skill);
-
-        return "redirect:/skill";
     }
 
     @RequestMapping(value = "view/{skillId}", method = RequestMethod.GET)
@@ -57,26 +68,35 @@ public class SkillController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit/{skillId}")
-    public String displayEditForm(Model model, @PathVariable int skillId) {
+    public String displayEditForm(Model model, @PathVariable int skillId, HttpServletRequest request) {
 
-        Skill skill = skillDao.findOne(skillId);
-        model.addAttribute("skill", skill);
-        model.addAttribute("title", "Edit Skill");
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            Skill skill = skillDao.findOne(skillId);
+            model.addAttribute("skill", skill);
+            model.addAttribute("title", "Edit Skill");
 
-        return "skill/edit";
+            return "skill/edit";
+        } else {
+            return "redirect:/nopeeking";
+        }
     }
 
     @RequestMapping(value = "/edit/{skillId}", method = RequestMethod.POST)
     public String edit(Model model, @ModelAttribute @Valid Skill skill, Errors errors, HttpServletRequest request) {
 
+        User user = getUserFromSession(request.getSession());
+        if (user.isGameMaster()) {
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Errors Character");
+                return "skill/edit/" + skill.getUid();
+            }
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Errors Character");
-            return "skill/edit/" + skill.getUid();
+            skillDao.save(skill);
+
+            return "redirect:/skill";
+        } else {
+            return "redirect:/nopeeking";
         }
-
-        skillDao.save(skill);
-
-        return "redirect:/skill";
     }
 }

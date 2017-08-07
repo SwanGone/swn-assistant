@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body class="container-fluid">
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <div th:object="${planet}">
     <h1 th:text="*{name}">Planet Name</h1>
     <ul>
+        <li >In System: <a th:text="*{sectorSystem.colNumber} + '' + *{sectorSystem.rowNumber}  + ' - ' +
+        *{sectorSystem.name}" th:href="'/sectorsystem/view/' + *{sectorSystem.uid}"></a></li>
         <li th:text="'Population: ' + *{population}">Population</li>
         <li th:text="'Tech Level: ' + *{techLevel}">Tech Level</li>
-        <li th:text="'Culture Notes: \n' + *{cultureNotes}">Culture Notes</li>
+        <li th:text="'Culture Notes:' + *{cultureNotes}">Culture Notes</li>
     </ul>
 
 
