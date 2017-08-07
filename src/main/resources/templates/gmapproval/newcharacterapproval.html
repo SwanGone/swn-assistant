@@ -5,11 +5,59 @@
 <form method="post">
     <h1>New Character:</h1>
     <div th:object="${proposedgamecharacter}">
-        <h2 th:text="*{name}">Character Name</h2>
-        <ul>
-            <li th:text="'Level: ' + *{level}">Max Hit Points</li>
-            <li th:text="'Max Hit Points: ' + *{hitPoints}">Max Hit Points</li>
-        </ul>
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h1 th:text="*{name}">Name</h1>
+                        <h2 th:text="'Level ' + *{level} + ' ' +  *{characterClass}">Class</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h2 th:text="'Max Hit Points: ' + *{hitPoints}"></h2>
+                        <h2 th:text="'Max Psi Points: ' + *{psiPoints}"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 th:text="'Strength: ' + *{strength}"></h2>
+                    <h2 th:text="'Dexterity: ' + *{dexterity}"></h2>
+                    <h2 th:text="'Constitution: ' + *{constitution}"></h2>
+                </div>
+                <div class="col-md-4">
+                    <h2 th:text="'Intelligence: ' + *{intelligence}"></h2>
+                    <h2 th:text="'Wisdom: ' + *{wisdom}"></h2>
+                    <h2 th:text="'Charisma: ' + *{charisma}"></h2>
+                </div>
+                <div class="col-md-4">
+                    <h2>Skills Known</h2>
+                    <p th:text="*{skillsKnown}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Gear Owned</h2>
+                    <p th:text="*{gearOwned}"></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Psychic Disciplines Known</h2>
+                    <p th:text="*{psychicDisciplinesKnown}"></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Psychic Disciplines Mastered</h2>
+                    <p th:text="*{psychicDisciplinesMastered}"></p>
+                </div>
+            </div>
+        </div>
     </div>
     <input type="radio" name="judgement" value="true" />Pass
     <input type="radio" name="judgement" value="false" />Fail<br />

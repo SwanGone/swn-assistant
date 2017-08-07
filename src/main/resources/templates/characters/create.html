@@ -4,27 +4,96 @@
 <body class="container">
 <form method="post" th:object="${gameCharacter}" class="form-group">
 
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label th:for="level">Level</label>
-        <input class="form-control" th:field="*{level}" />
-        <span th:errors="*{level}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label th:for="hitPoints">Max Hit Points</label>
-        <input class="form-control" th:field="*{hitPoints}" />
-        <span th:errors="*{hitPoints}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label th:for="gearOwned">Gear Owned</label>
-        <select>
-            <option th:each=" gearitem : ${gear}"  th:value="${gearitem}" th:text="${gearitem.name}"></option>
-        </select>
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label th:for="name">Name</label>
+                    <input class="form-control" th:field="*{name}" />
+                    <span th:errors="*{name}" class="error"></span>
 
+                    <label th:for="characterClass">Class</label>
+                    <input class="form-control" th:field="*{characterClass}" />
+                    <span th:errors="*{characterClass}" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label th:for="level">Level</label>
+                    <input class="form-control" th:field="*{level}" />
+                    <span th:errors="*{level}" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label th:for="hitPoints">Max Hit Points</label>
+                    <input class="form-control" th:field="*{hitPoints}" />
+                    <span th:errors="*{hitPoints}" class="error"></span>
+
+                    <label th:for="psiPoints">Max Psi Points</label>
+                    <input class="form-control" th:field="*{psiPoints}" />
+                    <span th:errors="*{psiPoints}" class="error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-md-4">
+                <label th:for="strength">Strength</label>
+                <input class="form-control" th:field="*{strength}" />
+                <span th:errors="*{strength}" class="error"></span>
+
+                <label th:for="dexterity">Dexterity</label>
+                <input class="form-control" th:field="*{dexterity}" />
+                <span th:errors="*{dexterity}" class="error"></span>
+
+                <label th:for="constitution">Constitution</label>
+                <input class="form-control" th:field="*{constitution}" />
+                <span th:errors="*{constitution}" class="error"></span>
+            </div>
+            <div class="col-md-4">
+                <label th:for="intelligence">Intelligence</label>
+                <input class="form-control" th:field="*{intelligence}" />
+                <span th:errors="*{intelligence}" class="error"></span>
+
+
+                <label th:for="wisdom">Wisdom</label>
+                <input class="form-control" th:field="*{wisdom}" />
+                <span th:errors="*{wisdom}" class="error"></span>
+
+                <label th:for="charisma">Charisma</label>
+                <input class="form-control" th:field="*{charisma}" />
+                <span th:errors="*{charisma}" class="error"></span>
+            </div>
+            <div class="col-md-4">
+                <label th:for="skillsKnown">Skills Known</label>
+                <textarea class="form-control" th:field="*{skillsKnown}" />
+                <span th:errors="*{skillsKnown}" class="error"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-md-4">
+                <label th:for="gearOwned">Gear Owned</label>
+                <textarea class="form-control" th:field="*{gearOwned}" />
+                <span th:errors="*{gearOwned}" class="error"></span>
+            </div>
+            <div class="col-md-4">
+                <label th:for="psychicDisciplinesKnown">Psychic Disciplines Known</label>
+                <textarea class="form-control" th:field="*{psychicDisciplinesKnown}" />
+                <span th:errors="*{psychicDisciplinesKnown}" class="error"></span>
+            </div>
+            <div class="col-md-4">
+                <label th:for="psychicDisciplinesMastered">Psychic Disciplines Mastered</label>
+                <textarea class="form-control" th:field="*{psychicDisciplinesMastered}" />
+                <span th:errors="*{psychicDisciplinesMastered}" class="error"></span>
+            </div>
+        </div>
     </div>
 
     <input type="submit" value="Create" />

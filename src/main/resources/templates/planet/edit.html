@@ -6,22 +6,32 @@
 
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
+        <input class="form-control" th:field="*{name}" th:value="*{name}"/>
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
+        <label th:for="sectorSystem">In system:</label>
+        <select th:field="*{sectorSystem}">
+            <option th:each="sector : ${sectors}"
+                    th:value="${sector.uid}"
+                    th:text="${sector.colNumber} + '' + ${sector.rowNumber} + ' - ' + ${sector.name}">
+            </option>
+        </select>
+        <span th:errors="*{sectorSystem}" class="error"></span>
+    </div>
+    <div class="form-group">
         <label th:for="techLevel">Tech Level</label>
-        <input class="form-control" th:field="*{techLevel}" />
+        <input class="form-control" th:field="*{techLevel}" th:value="*{techLevel}"/>
         <span th:errors="*{techLevel}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="population">Population</label>
-        <input class="form-control" th:field="*{population}" />
+        <input class="form-control" th:field="*{population}" th:value="*{population}"/>
         <span th:errors="*{population}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="cultureNotes">Culture Notes</label>
-        <textarea class="form-control" th:field="*{cultureNotes}" />
+        <textarea class="form-control" th:field="*{cultureNotes}" th:value="*{cultureNotes}"/>
         <span th:errors="*{cultureNotes}" class="error"></span>
     </div>
 
